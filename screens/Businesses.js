@@ -1,9 +1,122 @@
-import * as React from 'react';
-import { FlatList, Text } from 'react-native';
+import React, {useMemo, useCallback, useState, useLayoutEffect} from 'react';
+import {
+  FlatList,
+  StyleSheet,
+  TextInput,
+  View,
+  TouchableOpacity,
+  Image,
+  LayoutAnimation,
+} from 'react-native';
+import Colors from '../colors';
+import EmptyState from '../components/emptyState';
+import * as data from '../data.json';
+import {isEmpty, includes} from 'lodash';
+import BusinessRow from '../components/businessRow';
 
-export default class Businesses extends React.Component {
-  render() {
-    return <Text>Foo bar shibby</Text>
-    // return <FlatList />
-  }
+export default function Businesses({navigation}) {
+  LayoutAnimation.linear();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          style={styles.magnifyButton}
+          onPress={() => {
+            setSearchOn((state) => !state);
+            sortData('');
+          }}>
+          <Image source={require('../img/search.png')} style={styles.magnify} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, sortData]);
+
+  const companyData = useMemo(() => {
+    if (!isEmpty(data)) {
+      return Object.values(data);
+    }
+  }, []);
+
+  const [searchOn, setSearchOn] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [companyList, setCompanyList] = useState(companyData);
+
+  const sortData = useCallback(
+    (text) => {
+      setSearchTerm(text);
+      const list = companyData.filter((item) => {
+        if (includes(item.name, text)) {
+          return item;
+        }
+      });
+      setCompanyList(list);
+    },
+    [companyData],
+  );
+
+  const renderItem = ({item}) => {
+    return <BusinessRow business={item} />;
+  };
+
+  return (
+    <View style={styles.container}>
+      {searchOn && (
+        <View style={searchOn ? styles.searchView : null}>
+          <TextInput
+            style={styles.searchBox}
+            value={searchTerm}
+            placeholder="Search"
+            onChangeText={sortData}
+          />
+        </View>
+      )}
+      <FlatList
+        style={styles.listStyle}
+        data={companyList}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        ListEmptyComponent={
+          <EmptyState
+            title="Company list is empty."
+            bodyText={[
+              'Once you have a list of companies',
+              'they will show here.',
+            ]}
+          />
+        }
+      />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  listStyle: {
+    backgroundColor: Colors.light1,
+  },
+  searchView: {
+    backgroundColor: Colors.dark2,
+    paddingHorizontal: 12,
+    paddingVertical: 20,
+  },
+  searchBox: {
+    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    fontSize: 18,
+  },
+  magnifyButton: {
+    height: 25,
+    width: 25,
+    marginRight: 10,
+  },
+  magnify: {
+    resizeMode: 'contain',
+    width: '100%',
+    height: '100%',
+  },
+});

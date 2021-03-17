@@ -7,23 +7,19 @@
  */
 
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import 'react-native-gesture-handler';
-import Businesses from './screens/Businesses';
-import BusinessDetail from './screens/BusinessDetail';
+import Navigators from './navigators';
+import {StatusBar, Platform, UIManager} from 'react-native';
 
-const MainNavigator = createStackNavigator();
+if (
+  Platform.OS === 'android' &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 const App = () => {
-  return (
-    <NavigationContainer>
-      <MainNavigator.Navigator>
-        <MainNavigator.Screen name="Home" component={Businesses} />
-        <MainNavigator.Screen name="Profile" component={BusinessDetail} />
-      </MainNavigator.Navigator>
-    </NavigationContainer>
-  );
+  return <Navigators />;
 };
 
 export default App;
