@@ -12,7 +12,6 @@ import Charts
 class ChartView: UIView {
   
   let barChartView = BarChartView()
-  let label = UILabel()
 
   @objc var xValues: NSArray = []
   @objc var yValues: NSArray = []
