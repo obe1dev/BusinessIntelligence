@@ -19,6 +19,7 @@ export default function Businesses({navigation}) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
+      // sets the header right to a search button
       headerRight: () => (
         <TouchableOpacity
           style={styles.magnifyButton}
@@ -69,7 +70,7 @@ export default function Businesses({navigation}) {
   return (
     <View style={styles.container}>
       {searchOn && (
-        <View style={searchOn ? styles.searchView : null}>
+        <View style={styles.searchView}>
           <TextInput
             style={styles.searchBox}
             value={searchTerm}

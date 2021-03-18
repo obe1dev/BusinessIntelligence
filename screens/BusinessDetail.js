@@ -5,11 +5,12 @@ import {get, isEmpty} from 'lodash';
 import Chart from '../components/barChart';
 
 export default function BusinessDetail({navigation, route}) {
-  const revenue = route.params?.revenue ?? null;
+  const revenue = route.params?.revenue ?? [];
   let revValue = [];
   let revDate = [];
   revenue.map((item) => {
     if (get(item, 'date') && get(item, 'value')) {
+      //only display the month and year
       const parDate = moment(item.date).format('MMM YY');
       revValue.push(item.value);
       revDate.push(parDate);
