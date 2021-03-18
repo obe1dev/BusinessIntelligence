@@ -11,7 +11,7 @@ import {
 import Colors from '../colors';
 import EmptyState from '../components/emptyState';
 import * as data from '../data.json';
-import {isEmpty, includes} from 'lodash';
+import {isEmpty, includes, lowerCase} from 'lodash';
 import BusinessRow from '../components/businessRow';
 
 export default function Businesses({navigation}) {
@@ -40,14 +40,13 @@ export default function Businesses({navigation}) {
   }, []);
 
   const [searchOn, setSearchOn] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
   const [companyList, setCompanyList] = useState(companyData);
 
   const sortData = useCallback(
     (text) => {
-      setSearchTerm(text);
+      const lowerText = lowerCase(text);
       const list = companyData.filter((item) => {
-        if (includes(item.name, text)) {
+        if (includes(lowerCase(item.name), lowerText)) {
           return item;
         }
       });
@@ -73,7 +72,6 @@ export default function Businesses({navigation}) {
         <View style={styles.searchView}>
           <TextInput
             style={styles.searchBox}
-            value={searchTerm}
             placeholder="Search"
             onChangeText={sortData}
           />
