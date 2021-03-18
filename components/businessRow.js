@@ -12,7 +12,7 @@ export default function BusinessRow({business, onSelect}) {
   }
   return (
     <View style={style.separator}>
-      <TouchableOpacity style={style.container}>
+      <TouchableOpacity style={style.container} onPress={onSelect}>
         {get(business, 'name') && (
           <Text style={style.title}>{business.name}</Text>
         )}
@@ -41,6 +41,7 @@ const style = StyleSheet.create({
     fontSize: 30,
   },
   address: {
+    paddingTop: 3,
     fontSize: 15,
   },
 });

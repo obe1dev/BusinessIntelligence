@@ -56,7 +56,14 @@ export default function Businesses({navigation}) {
   );
 
   const renderItem = ({item}) => {
-    return <BusinessRow business={item} />;
+    return (
+      <BusinessRow
+        business={item}
+        onSelect={() => {
+          navigation.push('Profile', {...item});
+        }}
+      />
+    );
   };
 
   return (
@@ -81,7 +88,7 @@ export default function Businesses({navigation}) {
             title="Company list is empty."
             bodyText={[
               'Once you have a list of companies',
-              'they will show here.',
+              'they will be displayed here.',
             ]}
           />
         }
@@ -105,14 +112,14 @@ const styles = StyleSheet.create({
   searchBox: {
     backgroundColor: 'white',
     paddingVertical: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     borderRadius: 20,
     fontSize: 18,
   },
   magnifyButton: {
     height: 25,
     width: 25,
-    marginRight: 10,
+    marginRight: 13,
   },
   magnify: {
     resizeMode: 'contain',
