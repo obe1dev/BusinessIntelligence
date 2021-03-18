@@ -4,7 +4,6 @@ import React from 'react';
 import Colors from '../colors';
 
 import Main from './main';
-// import {navigationRef} from './ref'; //TODO:
 import Stack from './stack';
 
 export const recentNavState = [];
@@ -15,6 +14,7 @@ function trackStateChange(state) {
   while (recentNavState.length > 100) {
     recentNavState.shift();
   }
+  //TODO: Log current screen to crashlytics
 }
 export default function Navigation() {
   return (
