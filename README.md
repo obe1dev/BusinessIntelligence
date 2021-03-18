@@ -10,7 +10,7 @@ To Run this project
 1) Download the git repo to your desired location. 
 `$ git clone {the url to the GitHub repo}`
 
-2 ) cd into the new folder and type `yarn` this will install the required dependancies.
+2) cd into the new folder and type `yarn` this will install the required dependancies.
 
 3) Now cd into the iOS folder and run pod install
 `cd ios`
