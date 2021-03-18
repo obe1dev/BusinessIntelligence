@@ -1,7 +1,8 @@
 import React, {useLayoutEffect} from 'react';
-import {View, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import moment from 'moment';
-import {get} from 'lodash';
+import {get, isEmpty} from 'lodash';
+import Chart from '../components/barChart';
 
 export default function BusinessDetail({navigation, route}) {
   const revenue = route.params?.revenue ?? null;
@@ -21,8 +22,21 @@ export default function BusinessDetail({navigation, route}) {
   }, [navigation, route.params]);
 
   return (
-    <View>
-      <Text>cool</Text>
+    <View style={styles.container}>
+      {!isEmpty(revValue) && !isEmpty(revDate) && (
+        <Chart xValues={revDate} yValues={revValue} style={styles.chart} />
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+    paddingHorizontal: 15,
+  },
+  chart: {
+    width: '100%',
+    height: '95%',
+  },
+});
