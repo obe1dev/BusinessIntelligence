@@ -37,6 +37,7 @@ class ChartView: UIView {
       dataEntries.append(dataEntry)
     }
     let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Revenue")
+    chartDataSet.colors = [NSUIColor.darkGray]
     let chartData = BarChartData(dataSet: chartDataSet)
     barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: xValues as! [String])
     barChartView.data = chartData
