@@ -8,6 +8,8 @@ target 'BusinessIntelligence' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'Charts', '~> 3.6'
+
   target 'BusinessIntelligenceTests' do
     inherit! :complete
     # Pods for testing
