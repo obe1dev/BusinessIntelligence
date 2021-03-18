@@ -25,6 +25,8 @@ export default function Navigation() {
             backgroundColor: Colors.dark2,
             shadowColor: 'transparent',
           },
+          headerBackTitleVisible: false,
+          headerTintColor: Colors.light1,
           headerTitleStyle: {
             fontSize: 24,
             color: Colors.light1,
