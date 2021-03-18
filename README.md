@@ -1,4 +1,4 @@
-Thank You for giving me the opportunity to demonstrate my skills in this project.
+Thank you for giving me the opportunity to demonstrate my skills in this project.
 Oddly enough I have never had a chance to create a custom native module. It's been a fun experience learning how to connect MPAndroidChart/Charts with this project.
 
 I added a few features and styling to make it look similar to a Divvy product. I hope you enjoy it as much as I did coding it.
