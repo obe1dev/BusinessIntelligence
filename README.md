@@ -3,7 +3,7 @@ Oddly enough I have never had a chance to create a custom native module. It's be
 
 I added a few features and styling to make it look similar to a Divvy product. I hope you enjoy it as much as I did coding it.
 
-Feel free to reach out with any question.
+Feel free to reach out with any questions.
 
 To Run this project 
 
