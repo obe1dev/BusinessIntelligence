@@ -9,7 +9,7 @@
 import * as React from 'react';
 import 'react-native-gesture-handler';
 import Navigators from './navigators';
-import {StatusBar, Platform, UIManager} from 'react-native';
+import {Platform, UIManager} from 'react-native';
 
 if (
   Platform.OS === 'android' &&
