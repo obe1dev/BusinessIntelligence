@@ -6,6 +6,7 @@ import Colors from '../colors';
 import Main from './main';
 import Stack from './stack';
 
+// I exported this for a debug screen.
 export const recentNavState = [];
 
 function trackStateChange(state) {
@@ -15,6 +16,11 @@ function trackStateChange(state) {
     recentNavState.shift();
   }
   //TODO: Log current screen to crashlytics
+  // pass the current screen and params
+  // crashlytics().setAttribute(
+  //   'Current Screen',
+  //   curRoute.name + ': ' + JSON.stringify(curRoute.params)
+  // );
 }
 export default function Navigation() {
   return (

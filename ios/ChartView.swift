@@ -13,6 +13,7 @@ class ChartView: UIView {
   
   let barChartView = BarChartView()
   
+  // @objc makes it exportable to Objective-C and then JavaScript.
   // passed properties
   @objc var xValues: NSArray = []
   @objc var yValues: NSArray = []

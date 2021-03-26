@@ -8,6 +8,7 @@ StatusBar.setBarStyle('light-content');
 import Businesses from '../screens/Businesses';
 import BusinessDetail from '../screens/BusinessDetail';
 
+//  I like this structure to consolidate and setup the screens.
 const screens = [
   {
     name: 'Home',
@@ -22,4 +23,17 @@ const screens = [
 ];
 
 // Transform into React Navigation screen
+
+// also If I wanted to add a HOC Like a toast I could do it here.
+// accept another component as an argument. And will return a new component.
+
 export default screens.map((s) => <Screen key={s.name} {...s} />);
+
+// export const withToasts = (Component) => {
+//   const Wrapped = props => (
+//     <ToastWrapper>
+//       <Component {...props} />
+//     </ToastWrapper>
+//   );
+//   return Wrapped;
+// };

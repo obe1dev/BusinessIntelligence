@@ -15,8 +15,12 @@ import {isEmpty, includes, lowerCase} from 'lodash';
 import BusinessRow from '../components/businessRow';
 
 export default function Businesses({navigation}) {
+  //Fast way to add animation.
+  //Automatically animates views to their new positions when the next layout happens.
   LayoutAnimation.linear();
 
+  //If you need to mutate the DOM and/or do need to perform measurements
+  // this works the same was as componentDidMound, componentDidUpdate.
   useLayoutEffect(() => {
     navigation.setOptions({
       // sets the header right to a search button
@@ -31,8 +35,15 @@ export default function Businesses({navigation}) {
         </TouchableOpacity>
       ),
     });
+    // sortData has to be memorized otherwise this hook we be
+    // called every render.
   }, [navigation, sortData]);
 
+  // before optimizing I like to create it first
+  // because the data list is so small I normally wouldn't do this
+  // unless it was huge. it's just demonstrating that I know how to  use useMemo.
+  // Instead I would fetch the data
+  // store it in redux and get the data from a selector.
   const companyData = useMemo(() => {
     if (!isEmpty(data)) {
       return Object.values(data);
@@ -42,6 +53,9 @@ export default function Businesses({navigation}) {
   const [searchOn, setSearchOn] = useState(false);
   const [companyList, setCompanyList] = useState(companyData);
 
+  // Normally I wouldn't make this a hook either
+  // but I am using this in the useLayoutEffect and passing it as a dependency.
+  // useEffects are great for passing to a child to prevent unnecessary re-renders.
   const sortData = useCallback(
     (text) => {
       const lowerText = lowerCase(text);
@@ -68,6 +82,10 @@ export default function Businesses({navigation}) {
 
   return (
     <View style={styles.container}>
+      {/*
+        I added this here so it would be a sticky header
+        instead of adding it to ListHeaderComponent
+       */}
       {searchOn && (
         <View style={styles.searchView}>
           <TextInput

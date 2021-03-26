@@ -5,6 +5,10 @@ import {get, isEmpty} from 'lodash';
 import Chart from '../components/barChart';
 
 export default function BusinessDetail({navigation, route}) {
+  // Although I'm passing nav as props
+  // depending on how large my project is I would use
+  // reactNavigation useNavigation() hooks.
+  // for simplicity or for deeply nested children.
   const revenue = route.params?.revenue ?? [];
   let revValue = [];
   let revDate = [];
@@ -16,6 +20,7 @@ export default function BusinessDetail({navigation, route}) {
       revDate.push(parDate);
     }
   });
+  // If you need to mutate the DOM and/or do need to perform measurements
   useLayoutEffect(() => {
     navigation.setOptions({
       title: route.params?.name,
